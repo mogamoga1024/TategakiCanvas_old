@@ -1,4 +1,3 @@
-
 const canvas = document.querySelector("#tategaki-canvas");
 const context = canvas.getContext("2d", { willReadFrequently: true });
 
