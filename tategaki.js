@@ -85,6 +85,7 @@ const tategaki = (function() {
         const reverseCharList = "ー～";
         const centerJustifiedCharList = "()（）【】…";
         const leftJustifiedCharList = "」";
+        const standardChar = "あ";
     
         let minCanvasHeight = 0;
         const {
@@ -94,7 +95,7 @@ const tategaki = (function() {
             tmpContext.font = font;
             tmpContext.textBaseline = "top";
             tmpContext.textAlign = "center";
-            const measure = tmpContext.measureText("あ")
+            const measure = tmpContext.measureText(standardChar)
             tmpCanvas.width = Math.ceil(measure.width);
             minCanvasHeight = Math.ceil(Math.abs(measure.actualBoundingBoxAscent) + measure.actualBoundingBoxDescent);
             tmpCanvas.height = minCanvasHeight;
@@ -104,7 +105,7 @@ const tategaki = (function() {
             tmpContext.fillStyle = "#000";
             tmpContext.textBaseline = "top";
             tmpContext.textAlign = "center";
-            tmpContext.fillText("あ", tmpCanvas.width / 2, 0);
+            tmpContext.fillText(standardChar, tmpCanvas.width / 2, 0);
             const tmpPixels = tmpContext.getImageData(0, 0, tmpCanvas.width, tmpCanvas.height)
             return trimming(tmpPixels);
         })();
