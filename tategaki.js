@@ -25,8 +25,7 @@ function tategaki(canvas, x, y, font, text, tateMargin = 4) {
         tmpCanvas.height = minCanvasHeight;
 
         tmpContext.font = font;
-        tmpContext.fillStyle = "#fff";
-        tmpContext.fillRect(0, 0, tmpCanvas.width, tmpCanvas.height);
+        tmpContext.clearRect(0, 0, tmpCanvas.width, tmpCanvas.height);
         tmpContext.fillStyle = "#000";
         tmpContext.textBaseline = "top";
         tmpContext.textAlign = "center";
@@ -69,8 +68,7 @@ function tategaki(canvas, x, y, font, text, tateMargin = 4) {
 
     tmpCanvas.width = Math.ceil(tmpCanvasWidth);
     tmpCanvas.height = Math.ceil(tmpCanvasHeight) + tateMargin * (charList.length - 1);
-    tmpContext.fillStyle = "#fff";
-    tmpContext.fillRect(0, 0, tmpCanvas.width, tmpCanvas.height);
+    tmpContext.clearRect(0, 0, tmpCanvas.width, tmpCanvas.height);
 
     const tmpCanvas2 = document.createElement("canvas");
     const tmpContext2 = tmpCanvas2.getContext("2d", { willReadFrequently: true });
@@ -93,8 +91,7 @@ function tategaki(canvas, x, y, font, text, tateMargin = 4) {
 
         // テキスト反映
         tmpContext2.font = font;
-        tmpContext2.fillStyle = "#fff";
-        tmpContext2.fillRect(0, 0, tmpCanvas2.width, tmpCanvas2.height);
+        tmpContext2.clearRect(0, 0, tmpCanvas2.width, tmpCanvas2.height);
         tmpContext2.fillStyle = "#000";
         tmpContext2.textBaseline = "middle";
         tmpContext2.textAlign = "center";
@@ -152,8 +149,7 @@ function tategaki(canvas, x, y, font, text, tateMargin = 4) {
     let yokoMargin = 0;
     tmpCanvas2.width = maxWidth + yokoMargin * 2;
     tmpCanvas2.height = totalHeight + tateMargin * 2;
-    tmpContext2.fillStyle = "#fff";
-    tmpContext2.fillRect(0, 0, tmpCanvas2.width, tmpCanvas2.height);
+    tmpContext2.clearRect(0, 0, tmpCanvas2.width, tmpCanvas2.height);
     const dstX = (tmpCanvas2.width - tmpCanvas.width) / 2;
     tmpContext2.drawImage(tmpCanvas, dstX, tateMargin);
 
@@ -171,7 +167,7 @@ function trimming(pixels) {
     for (let col = 0; col < pixels.width; col++) {
         for (let row = 0; row < pixels.height; row++) {
             const i = row * pixels.width * 4 + col * 4;
-            if (data[i] !== 255) {
+            if (data[i + 3] !== 0) {
                 targetLeftX = col;
                 break;
             }
@@ -189,7 +185,7 @@ function trimming(pixels) {
     for (let col = pixels.width - 1; col >= 0; col--) {
         for (let row = 0; row < pixels.height; row++) {
             const i = row * pixels.width * 4 + col * 4;
-            if (data[i] !== 255) {
+            if (data[i + 3] !== 0) {
                 targetRightX = col;
                 break;
             }
@@ -203,7 +199,7 @@ function trimming(pixels) {
     for (let row = 0; row < pixels.height; row++) {
         for (let col = targetLeftX; col <= targetRightX; col++) {
             const i = row * pixels.width * 4 + col * 4;
-            if (data[i] !== 255) {
+            if (data[i + 3] !== 0) {
                 targetTopY = row;
                 break;
             }
@@ -217,7 +213,7 @@ function trimming(pixels) {
     for (let row = pixels.height - 1; row >= 0; row--) {
         for (let col = targetLeftX; col <= targetRightX; col++) {
             const i = row * pixels.width * 4 + col * 4;
-            if (data[i] !== 255) {
+            if (data[i + 3] !== 0) {
                 targetBottomY = row;
                 break;
             }
