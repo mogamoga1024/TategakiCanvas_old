@@ -74,9 +74,7 @@ const tategaki = (function() {
         };
     }
 
-    return function(canvas, x, y, font, text, tateMargin = 4) {
-        const context = canvas.getContext("2d", { willReadFrequently: true });
-    
+    return function(font, text, tateMargin = 4) {
         const tmpCanvas = document.createElement("canvas");
         const tmpContext = tmpCanvas.getContext("2d", { willReadFrequently: true });
         
@@ -234,6 +232,6 @@ const tategaki = (function() {
         const dstX = (tmpCanvas2.width - tmpCanvas.width) / 2;
         tmpContext2.drawImage(tmpCanvas, dstX, tateMargin);
     
-        context.drawImage(tmpCanvas2, x, y, tmpCanvas2.width, tmpCanvas2.height);
+        return tmpCanvas2;
     }
 })();
