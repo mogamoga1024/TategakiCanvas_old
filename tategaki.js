@@ -1,4 +1,3 @@
-
 const tategaki = (function() {
     const trimming = function(pixels) {
         const data = pixels.data;
