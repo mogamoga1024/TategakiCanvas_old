@@ -106,8 +106,7 @@ const tategaki = (function() {
             tmpContext.textBaseline = "top";
             tmpContext.textAlign = "center";
             tmpContext.fillText(standardChar, tmpCanvas.width / 2, 0);
-            const tmpPixels = tmpContext.getImageData(0, 0, tmpCanvas.width, tmpCanvas.height)
-            return trimming(tmpPixels);
+            return trimming(tmpContext.getImageData(0, 0, tmpCanvas.width, tmpCanvas.height));
         })();
     
         // 各文字の幅、高さの抽出とか
