@@ -11,4 +11,4 @@ https://mogamoga1024.github.io/TategakiCanvas/sample.html
 
 ## license
 
-MIT or WTFPL
+MIT or WTFPL or くいなちゃんライセンス
