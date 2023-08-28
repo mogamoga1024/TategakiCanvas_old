@@ -1,5 +1,7 @@
 
-function tategaki(canvas, x, y, font, text) {
+function tategaki(canvas, x, y, font, text, tateMargin = 4) {
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+
     const tmpCanvas = document.createElement("canvas");
     const tmpContext = tmpCanvas.getContext("2d", { willReadFrequently: true });
     
@@ -30,7 +32,7 @@ function tategaki(canvas, x, y, font, text) {
         tmpContext.textAlign = "center";
         tmpContext.fillText("あ", tmpCanvas.width / 2, 0);
         const tmpPixels = tmpContext.getImageData(0, 0, tmpCanvas.width, tmpCanvas.height)
-        return CanvasUtils.trimming(tmpPixels);
+        return trimming(tmpPixels);
     })();
 
     // 各文字の幅、高さの抽出とか
@@ -109,7 +111,7 @@ function tategaki(canvas, x, y, font, text) {
 
         tmpContext2.fillText(char.value, tmpCanvas2.width / 2, tmpCanvas2.height / 2);
         // トリミング
-        const trimmed = CanvasUtils.trimming(this.pixels);
+        const trimmed = trimming(tmpContext2.getImageData(0, 0, tmpCanvas2.width, tmpCanvas2.height));
 
         // 転写
         let dstX = (tmpCanvas.width - trimmed.width) / 2;
@@ -155,9 +157,7 @@ function tategaki(canvas, x, y, font, text) {
     const dstX = (tmpCanvas2.width - tmpCanvas.width) / 2;
     tmpContext2.drawImage(tmpCanvas, dstX, tateMargin);
 
-    const context = canvas.getContext("2d", { willReadFrequently: true });
-    const rate = yokoPixelCount / tmpCanvas2.width;
-    context.drawImage(tmpCanvas2, x, y, yokoPixelCount, tmpCanvas2.height * rate);
+    context.drawImage(tmpCanvas2, x, y, tmpCanvas2.width, tmpCanvas2.height);
 }
 
 function trimming(pixels) {
