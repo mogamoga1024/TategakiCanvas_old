@@ -67,15 +67,6 @@ function tategaki(canvas, x, y, font, text) {
 
     tmpCanvas.width = Math.ceil(tmpCanvasWidth);
     tmpCanvas.height = Math.ceil(tmpCanvasHeight) + tateMargin * (charList.length - 1);
-
-    const isValidCanvas = canvasSize.test({
-        width : tmpCanvas.width,
-        height: tmpCanvas.height
-    });
-    if (!isValidCanvas) {
-        throw new TooLargeCanvasError("キャンバスでかすぎ");
-    }
-
     tmpContext.fillStyle = "#fff";
     tmpContext.fillRect(0, 0, tmpCanvas.width, tmpCanvas.height);
 
@@ -164,10 +155,9 @@ function tategaki(canvas, x, y, font, text) {
     const dstX = (tmpCanvas2.width - tmpCanvas.width) / 2;
     tmpContext2.drawImage(tmpCanvas, dstX, tateMargin);
 
+    const context = canvas.getContext("2d", { willReadFrequently: true });
     const rate = yokoPixelCount / tmpCanvas2.width;
-    this.#canvas.width = yokoPixelCount;
-    this.#canvas.height = tmpCanvas2.height * rate;
-    this.#context.drawImage(tmpCanvas2, 0, 0, this.#canvas.width, this.#canvas.height);
+    context.drawImage(tmpCanvas2, x, y, yokoPixelCount, tmpCanvas2.height * rate);
 }
 
 trimming(pixels) {
