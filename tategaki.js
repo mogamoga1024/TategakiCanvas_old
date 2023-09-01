@@ -77,8 +77,8 @@ const tategaki = (function() {
         const tmpCanvas = document.createElement("canvas");
         const tmpContext = tmpCanvas.getContext("2d", { willReadFrequently: true });
         
-        // 小さい文字 デフォルトで右寄せ
-        const smallCharList = "、。っゃゅょぁぃぅぇぉッャュョァィゥェォ「」『』()（）【】";
+        // 小さい文字 デフォルトで右寄せ 半角スペースもここに属する
+        const smallCharList = "、。っゃゅょぁぃぅぇぉッャュョァィゥェォ 「」『』()（）【】";
         // 時計回りに90度回転させる文字
         const rotateCharList = "「」『』()（）【】ー ～…";
         // 反転させる文字
@@ -186,7 +186,20 @@ const tategaki = (function() {
     
             tmpContext2.fillText(char.value, tmpCanvas2.width / 2, tmpCanvas2.height / 2);
             // トリミング
-            const trimmed = trimming(tmpContext2.getImageData(0, 0, tmpCanvas2.width, tmpCanvas2.height));
+            let trimmed = null;
+            try {
+                trimmed = trimming(tmpContext2.getImageData(0, 0, tmpCanvas2.width, tmpCanvas2.height));
+            }
+            catch (e) {
+                trimmed = {
+                    x: 0, y: 0,
+                    width: standardCharWidth,
+                    height: standardCharHeight
+                };
+                if (char.value === " ") {
+                    trimmed.height /= 2;
+                }
+            }
     
             // 転写
             let dstX = (tmpCanvas.width - trimmed.width) / 2;
