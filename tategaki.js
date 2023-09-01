@@ -78,15 +78,15 @@ const tategaki = (function() {
         const tmpContext = tmpCanvas.getContext("2d", { willReadFrequently: true });
         
         // 小さい文字 デフォルトで右寄せ
-        const smallCharList = "、。っゃゅょぁぃぅぇぉッャュョァィゥェォ「」()（）【】";
+        const smallCharList = "、。っゃゅょぁぃぅぇぉッャュョァィゥェォ「」『』()（）【】";
         // 時計回りに90度回転させる文字
-        const rotateCharList = "「」()（）【】ー ～…";
+        const rotateCharList = "「」『』()（）【】ー ～…";
         // 反転させる文字
         const reverseCharList = "ー～";
         // 中央寄せする文字
         const centerJustifiedCharList = "()（）【】…";
         // 左寄せする文字
-        const leftJustifiedCharList = "」";
+        const leftJustifiedCharList = "」』";
         // 基準の文字 寄せの基準とか足りない余白の計算に使ったりする
         const standardChar = "あ";
     
