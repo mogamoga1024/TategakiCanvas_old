@@ -222,9 +222,17 @@ const tategaki = (function() {
                     isLargeMarginChar = false;
                 }
             }
+
+            // 小さい文字も最低限の高さを与える
+            const standardCharHalfHeight = standardCharHeight / 2;
+            const isSmallMarginChar = isSmallChar && trimmed.height < standardCharHalfHeight;
+
             const prevDestY = dstY;
             if (isLargeMarginChar) {
                 dstY += (standardCharHeight - trimmed.height) / 2;
+            }
+            else if (isSmallMarginChar) {
+                dstY += (standardCharHalfHeight - trimmed.height) / 2;
             }
     
             tmpContext.putImageData(tmpContext2.getImageData(trimmed.x, trimmed.y, trimmed.width, trimmed.height), dstX, dstY);
@@ -233,6 +241,11 @@ const tategaki = (function() {
                 dstY = prevDestY;
                 dstY += standardCharHeight + letterSpacing;
                 totalHeight += standardCharHeight;
+            }
+            else if (isSmallMarginChar) {
+                dstY = prevDestY;
+                dstY += standardCharHalfHeight + letterSpacing;
+                totalHeight += standardCharHalfHeight;
             }
             else {
                 dstY += trimmed.height + letterSpacing;
