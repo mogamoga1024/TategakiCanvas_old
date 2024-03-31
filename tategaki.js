@@ -73,7 +73,7 @@ const tategaki = (function() {
         };
     }
 
-    return function(font, text, tateMargin = 4) {
+    return function(font, text, tateMargin = 4, letterSpacing = 4) {
         const tmpCanvas = document.createElement("canvas");
         const tmpContext = tmpCanvas.getContext("2d", { willReadFrequently: true });
         
@@ -145,14 +145,14 @@ const tategaki = (function() {
         }
     
         tmpCanvas.width = Math.ceil(tmpCanvasWidth);
-        tmpCanvas.height = Math.ceil(tmpCanvasHeight) + tateMargin * (charList.length - 1);
+        tmpCanvas.height = Math.ceil(tmpCanvasHeight) + letterSpacing * (charList.length - 1);
         tmpContext.clearRect(0, 0, tmpCanvas.width, tmpCanvas.height);
     
         const tmpCanvas2 = document.createElement("canvas");
         const tmpContext2 = tmpCanvas2.getContext("2d", { willReadFrequently: true });
         let dstY = 0;
         let maxWidth = standardCharWidth;
-        let totalHeight = tateMargin * (charList.length - 1);
+        let totalHeight = letterSpacing * (charList.length - 1);
         for (const char of charList) {
             const isSmallChar = smallCharList.includes(char.value);
             const isRotateCar = rotateCharList.includes(char.value);
@@ -231,11 +231,11 @@ const tategaki = (function() {
     
             if (isLargeMarginChar) {
                 dstY = prevDestY;
-                dstY += standardCharHeight + tateMargin;
+                dstY += standardCharHeight + letterSpacing;
                 totalHeight += standardCharHeight;
             }
             else {
-                dstY += trimmed.height + tateMargin;
+                dstY += trimmed.height + letterSpacing;
                 totalHeight += trimmed.height;
             }
     
