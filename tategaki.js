@@ -87,6 +87,10 @@ const tategaki = (function() {
         const centerJustifiedCharList = "()（）【】…";
         // 左寄せする文字
         const leftJustifiedCharList = "」』";
+        // 上寄せする文字
+        const topJustifiedCharList = "」』";
+        // 下寄せする文字
+        const bottomJustifiedCharList = "「『";
         // 基準の文字 寄せの基準とか足りない余白の計算に使ったりする
         const standardChar = "あ";
     
@@ -159,6 +163,8 @@ const tategaki = (function() {
             const isReverseChar = reverseCharList.includes(char.value);
             const isCenterJustifiedChar = centerJustifiedCharList.includes(char.value); 
             const isLeftJustifiedChar = leftJustifiedCharList.includes(char.value);
+            const isTopJustifiedChar = topJustifiedCharList.includes(char.value);
+            const isBottomJustifiedChar = bottomJustifiedCharList.includes(char.value);
     
             tmpCanvas2.width = Math.ceil(char.canvasWidth);
             tmpCanvas2.height = Math.max(Math.ceil(char.canvasHeight), minCanvasHeight);
@@ -232,7 +238,15 @@ const tategaki = (function() {
                 dstY += (standardCharHeight - trimmed.height) / 2;
             }
             else if (isSmallMarginChar) {
-                dstY += (standardCharHalfHeight - trimmed.height) / 2;
+                if (isTopJustifiedChar) {
+                    // 何もしない
+                }
+                else if (isBottomJustifiedChar) {
+                    dstY += standardCharHalfHeight - trimmed.height;
+                }
+                else {
+                    dstY += (standardCharHalfHeight - trimmed.height) / 2;
+                }
             }
     
             tmpContext.putImageData(tmpContext2.getImageData(trimmed.x, trimmed.y, trimmed.width, trimmed.height), dstX, dstY);
