@@ -80,7 +80,7 @@ const tategaki = (function() {
         // 小さい文字 デフォルトで右寄せ 半角スペースもここに属する
         const smallCharList = "、。.,っゃゅょぁぃぅぇぉッャュョァィゥェォ 「」『』()（）【】";
         // 時計回りに90度回転させる文字
-        const rotateCharList = "「」『』()（）【】ー ～…";
+        const rotateCharList = "「」『』()（）【】ー ～…-";
         // 反転させる文字
         const reverseCharList = "ー～";
         // 中央寄せする文字
