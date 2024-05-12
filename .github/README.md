@@ -4,7 +4,7 @@
 使い方はsample.jsを見れば秒で分かります。
 
 サンプル  
-https://mogamoga1024.github.io/TategakiCanvas/sample.html
+https://mogamoga1024.github.io/TategakiCanvas_old/sample.html
 
 ## license
 
