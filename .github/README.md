@@ -1,3 +1,7 @@
+## 転生先
+
+https://github.com/mogamoga1024/VerticalTextCanvas
+
 # TategakiCanvas
 縦書きキャンバス
 
